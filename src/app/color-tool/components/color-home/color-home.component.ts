@@ -17,6 +17,8 @@ export class ColorHomeComponent implements OnInit {
   colorForm!: FormGroup;
 
   //STEP: 2 - Selector
+  //this function is recieiving a state object and returning a property on the state - 
+  //state data can be utilized within this function.
   @Select((state:{colorTool: IColorToolStateModel}) => {
     return state.colorTool.colors;
   })

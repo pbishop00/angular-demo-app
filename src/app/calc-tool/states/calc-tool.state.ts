@@ -1,13 +1,13 @@
+import { CONTEXT_NAME } from "@angular/compiler/src/render3/view/util";
 import { Injectable } from "@angular/core";
 import { Action, State, StateContext } from "@ngxs/store";
 import { Add, Multiply, Subtract, Divide } from "../actions/calc-action";
-import { DeleteHistoryEntry } from "../actions/calc-history-action";
+import { ClearHistory, DeleteHistoryEntry } from "../actions/calc-history-action";
 import { HistoryEntry } from "../model/calc-history";
 
 
 
 export interface ICalculatorToolStateModel{
-    result: number;
     history: HistoryEntry[];
 }
 
@@ -18,7 +18,6 @@ export interface ICalculatorToolStateModel{
 @State<ICalculatorToolStateModel>({
     name: 'calcTool',
     defaults: {
-        result: 0,
         history: [],
     },
 })
@@ -26,9 +25,8 @@ export interface ICalculatorToolStateModel{
 export class CalcToolState{
     @Action(Add)
     addInput(ctx: StateContext<ICalculatorToolStateModel>, action: Add){
-        const {result, history} = ctx.getState();
+        const {history} = ctx.getState();
         ctx.patchState({
-            result: result + action.input,
             history:[
                 ...history,
                 {
@@ -42,9 +40,8 @@ export class CalcToolState{
     }
     @Action(Subtract)
     subtractInput(ctx: StateContext<ICalculatorToolStateModel>, action: Subtract){
-        const {result, history} = ctx.getState();
+        const {history} = ctx.getState();
         ctx.patchState({
-            result: result - action.input,
             history:[
                 ...history,
                 {
@@ -58,9 +55,8 @@ export class CalcToolState{
     }
     @Action(Multiply)
     multiplyInput(ctx: StateContext<ICalculatorToolStateModel>, action: Multiply){
-        const {result, history} = ctx.getState();
+        const {history} = ctx.getState();
         ctx.patchState({
-            result: result * action.input,
             history:[
                 ...history,
                 {
@@ -74,9 +70,8 @@ export class CalcToolState{
     }
     @Action(Divide)
     divideInput(ctx: StateContext<ICalculatorToolStateModel>, action: Divide){
-        const {result, history} = ctx.getState();
+        const {history} = ctx.getState();
         ctx.patchState({
-            result: result / action.input,
             history:[
                 ...history,
                 {
@@ -91,10 +86,16 @@ export class CalcToolState{
 
     @Action(DeleteHistoryEntry)
     deleteHistoryEntry(ctx: StateContext<ICalculatorToolStateModel>, action: DeleteHistoryEntry){
-        const {result, history} = ctx.getState();
+        const {history} = ctx.getState();
         ctx.patchState({
-            result: result,
             history: history.filter(h => h.id !== action.historyId),
+        });
+    }
+
+    @Action(ClearHistory)
+    clearHistory(ctx: StateContext<ICalculatorToolStateModel>){
+        ctx.patchState({
+            history: []
         });
     }
    

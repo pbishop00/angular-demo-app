@@ -9,6 +9,7 @@
     <button (click)="doSubtract()">Subtract</button>
     <button (click)="doMultiply()">Multiply</button>
     <button (click)="doDivide()">Divide</button>
+    <button (click)="doReset()">Clear</button>
 
 </form>
 <h3>{{result$ | async}}</h3>
@@ -26,3 +27,7 @@
         </tr>
     </tbody>
 </table>
+<h3>Operation Counts</h3>
+<ul>
+    <li *ngFor="let c of counts$ | async">{{c.opType}}: {{c.opCount}}</li>
+</ul>
