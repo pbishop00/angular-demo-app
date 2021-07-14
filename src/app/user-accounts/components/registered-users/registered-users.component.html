@@ -1,0 +1,32 @@
+<h3>Registered Users</h3>
+
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Username</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Title</th>
+            <th>Archived</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngIf="(users$ | async)!.length === 0">
+            <td colspan="7">There are no registered users.</td>
+        </tr>
+        <tr *ngIf="(displayArchived$ | async)!"><td colspan="7"><button (click)="toggleArchivedUserDisplay()">Hide Archived</button></td></tr>
+        <tr *ngIf="!(displayArchived$ | async)!"><td colspan="7"><button (click)="toggleArchivedUserDisplay()">Show Archived</button></td></tr>
+        <tr *ngFor="let user of users$ | async">
+            <ng-container *ngIf="(displayArchived$ | async)|| (!user.archived)">
+            <td>{{user.id}}</td>
+            <td>{{user.username}}</td>
+            <td>{{user.firstName}}</td>
+            <td>{{user.lastName}}</td>
+            <td>{{user.title}}</td>
+            <td>{{user.archived}}</td>
+            <td><button (click)="toggleUserArchive(user)">Toggle Archive</button></td>
+        </ng-container>
+        </tr>
+    </tbody>
+</table>

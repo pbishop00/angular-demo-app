@@ -1,0 +1,22 @@
+<!--component render logic-->
+
+<h3>Register User</h3>
+<form [formGroup]="registerUserForm">
+    <label>
+        Username:
+        <input type="text" formControlName="username"/>
+    </label>
+    <label>
+        First Name:
+        <input type="text" formControlName="firstName"/>
+    </label>
+    <label>
+        Last Name:
+        <input type="text" formControlName="lastName"/>
+    </label>
+    <label>
+        Title:
+        <input type="text" formControlName="title"/>
+    </label>
+    <button (click)="doRegisterUser()">Register User</button>
+</form>

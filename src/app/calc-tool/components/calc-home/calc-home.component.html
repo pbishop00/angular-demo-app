@@ -1,0 +1,28 @@
+<h1>Calculator Tool</h1>
+
+<form [formGroup]="calcForm">
+    <label>
+        Input:
+        <input type="number" formControlName="numInput" />
+    </label>
+    <button (click)="doAdd()">Add</button>
+    <button (click)="doSubtract()">Subtract</button>
+    <button (click)="doMultiply()">Multiply</button>
+    <button (click)="doDivide()">Divide</button>
+
+</form>
+<h3>{{result$ | async}}</h3>
+<table>
+    <thead>
+        <tr>
+            <th colspan="3">History</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let hist of history$ | async">
+            <td>{{hist.opType}}</td>
+            <td>{{hist.opValue}}</td>
+            <td><button (click)="delHistory(hist.id)">Remove</button></td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,21 @@
+<h1>Color Tool</h1>
+
+<ul>
+  <!-- STEP: 3 - Template -->
+  <li *ngFor="let color of colors$ | async">
+    {{color.name}} {{color.hexcode}} <button (click)="doDeleteColor(color.id)">Remove</button>
+  </li>
+</ul>
+
+<form [formGroup]="colorForm">
+  <label>
+    Name:
+    <input type="text" formControlName="name">
+  </label>
+  <label>
+    Hexcode:
+    <input type="text" formControlName="hexcode">
+  </label>
+  <button (click)="doAddColor()">Add</button>
+</form>
+

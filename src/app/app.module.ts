@@ -3,6 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { UserAccountsModule } from './user-accounts/user-accounts.module';
+import { ColorToolModule } from './color-tool/color-tool.module';
+import { CalcToolModule } from './calc-tool/calc-tool.module';
 
 @NgModule({
   declarations: [
@@ -10,7 +13,10 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    UserAccountsModule,
+    ColorToolModule,
+    CalcToolModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
