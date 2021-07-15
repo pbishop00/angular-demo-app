@@ -1,32 +1,109 @@
 {
-    "history": [
-        {"id": 1, "opType": "Add", "opValue": 7},
-        {"id": 1, "opType": "Multiply", "opValue": 4},
-        {"id": 1, "opType": "Subtract", "opValue": 9},
-        {"id": 1, "opType": "Divide", "opValue": 4},
-        {"id": 1, "opType": "Multiply", "opValue": 42}
-    ],
-    "colors": [
-      { "id": 1, "name": "red", "hexcode": "#ff0000" },
-      { "id": 2, "name": "green", "hexcode": "#00ff00" },
-      { "id": 3, "name": "blue", "hexcode": "#0000ff" }
-    ],
-    "cars": [
-      {
-        "id": 1,
-        "make": "Ford",
-        "model": "Fusion Hybrid",
-        "year": 2019,
-        "color": "blue",
-        "price": 45000
-      },
-      {
-        "id": 2,
-        "make": "Tesla",
-        "model": "S",
-        "year": 2018,
-        "color": "red",
-        "price": 100000
-      }
-    ]
-  }
+  "history": [
+    {
+      "opType": "Add",
+      "opValue": 0,
+      "id": 1
+    },
+    {
+      "opType": "Add",
+      "opValue": 3,
+      "id": 2
+    },
+    {
+      "opType": "Add",
+      "opValue": 3,
+      "id": 3
+    },
+    {
+      "opType": "Add",
+      "opValue": 3,
+      "id": 4
+    },
+    {
+      "opType": "Multiply",
+      "opValue": 3,
+      "id": 5
+    },
+    {
+      "opType": "Multiply",
+      "opValue": 3,
+      "id": 6
+    },
+    {
+      "opType": "Multiply",
+      "opValue": 3,
+      "id": 7
+    },
+    {
+      "opType": "Subtract",
+      "opValue": 3,
+      "id": 8
+    },
+    {
+      "opType": "Subtract",
+      "opValue": 3,
+      "id": 9
+    },
+    {
+      "opType": "Divide",
+      "opValue": 3,
+      "id": 10
+    },
+    {
+      "opType": "Multiply",
+      "opValue": 3,
+      "id": 11
+    },
+    {
+      "opType": "Multiply",
+      "opValue": 3,
+      "id": 12
+    }
+  ],
+  "colors": [
+    {
+      "id": 1,
+      "name": "red",
+      "hexcode": "#ff0000"
+    },
+    {
+      "id": 2,
+      "name": "green",
+      "hexcode": "#00ff00"
+    },
+    {
+      "id": 3,
+      "name": "blue",
+      "hexcode": "#0000ff"
+    },
+    {
+      "name": "Purple",
+      "hexcode": "#ff00ff",
+      "id": 4
+    },
+    {
+      "name": "aqua",
+      "hexcode": "#00ffff",
+      "id": 5
+    }
+  ],
+  "cars": [
+    {
+      "id": 1,
+      "make": "Ford",
+      "model": "Fusion Hybrid",
+      "year": 2019,
+      "color": "blue",
+      "price": 45000
+    },
+    {
+      "id": 2,
+      "make": "Tesla",
+      "model": "S",
+      "year": 2018,
+      "color": "red",
+      "price": 100000
+    }
+  ]
+}

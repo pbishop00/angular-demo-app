@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store, Select } from '@ngxs/store';
 import { FormGroup, FormBuilder, Form } from '@angular/forms';
-
+import { tap } from 'rxjs/operators';
 import { IColorToolStateModel } from '../../states/color-tool.state';
 import { Color, NewColor } from '../../models/colors';
 import { AppendColor, RemoveColor } from '../../actions/color-action';
@@ -39,7 +39,11 @@ export class ColorHomeComponent implements OnInit {
   doAddColor(){
     const newColor = this.colorForm.value as NewColor;
     //STEP: 5 - Dispatch the change 
-    this.store.dispatch(new AppendColor(newColor) /*STEP 4: Create Action*/);
+    this.store
+    .dispatch(new AppendColor(newColor) /*STEP 4: Create Action*/)
+    .pipe(
+      tap(data => { console.log(data); console.log("All Done");})
+    ).subscribe();
   }
 
   doDeleteColor(colorId: number){

@@ -2,7 +2,8 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { HistoryEntry, NewHistoryEntry } from "../model/calc-history";
 import { environment } from "src/environments/environment";
-
+import { forkJoin } from "rxjs";
+import { switchMap } from "rxjs/operators";
 @Injectable({
     providedIn: 'root'
   })
@@ -24,5 +25,15 @@ import { environment } from "src/environments/environment";
     remove(entryId: number){
       const url = `${environment.apiUrl}/history/${encodeURIComponent(entryId)}`;
       return this.httpClient.delete<void>(url)
+    }
+
+    clear(){
+      console.log("Clearing the calc history");
+      
+      return this.httpClient.get<HistoryEntry[]>(`${environment.apiUrl}/history`)
+          .pipe(switchMap(history => forkJoin(history.map(entry => this.remove(entry.id)))))
+      
+      
+      
     }
   }
