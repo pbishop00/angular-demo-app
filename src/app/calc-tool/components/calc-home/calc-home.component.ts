@@ -10,6 +10,7 @@ import { ICalculatorToolStateModel } from '../../states/calc-tool.state';
 import { OpCounts } from '../../model/calc-operation-counts';
 import { resultSelector } from '../../selectors/result-selector';
 import { operationCount } from '../../selectors/op-count-selector';
+import { RefreshHistory } from '../../actions/calc-history-action';
 @Component({
   selector: 'app-calc-home',
   templateUrl: './calc-home.component.html',
@@ -42,7 +43,8 @@ export class CalcHomeComponent implements OnInit {
   ngOnInit(): void {
     this.calcForm = this.fb.group({
       numInput: '0',
-    })
+    });
+    this.store.dispatch(new RefreshHistory());
   }
 
 

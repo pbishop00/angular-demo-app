@@ -10,3 +10,8 @@ export class ClearHistory{
     static readonly type = '[History] Clear'
     constructor(){}
 }
+
+export class RefreshHistory{
+    static readonly type = '[History] Refresh'
+    constructor(){};
+}

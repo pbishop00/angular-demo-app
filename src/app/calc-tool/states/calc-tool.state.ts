@@ -2,9 +2,10 @@ import { CONTEXT_NAME } from "@angular/compiler/src/render3/view/util";
 import { Injectable } from "@angular/core";
 import { Action, State, StateContext } from "@ngxs/store";
 import { Add, Multiply, Subtract, Divide } from "../actions/calc-action";
-import { ClearHistory, DeleteHistoryEntry } from "../actions/calc-history-action";
+import { ClearHistory, DeleteHistoryEntry, RefreshHistory } from "../actions/calc-history-action";
 import { HistoryEntry } from "../model/calc-history";
-
+import { CalcHistoryApiService } from "../services/calc-history-service.service";
+import { tap } from "rxjs/operators";
 
 
 export interface ICalculatorToolStateModel{
@@ -25,6 +26,17 @@ export interface ICalculatorToolStateModel{
 })
 @Injectable()
 export class CalcToolState{
+
+    constructor(private historyApi: CalcHistoryApiService) {}
+
+    @Action(RefreshHistory)
+    refreshColors(ctx: StateContext<ICalculatorToolStateModel>) {
+        console.log('In Refresh History');
+        return this.historyApi.all().pipe(tap(history => ctx.patchState({ history })));
+
+
+    }
+
     @Action(Add)
     addInput(ctx: StateContext<ICalculatorToolStateModel>, action: Add){
         const {history} = ctx.getState();

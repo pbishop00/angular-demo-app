@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgxsModule } from '@ngxs/store';
 import { environment } from 'src/environments/environment';
 import { CalcToolState } from './states/calc-tool.state';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -15,6 +16,7 @@ import { CalcToolState } from './states/calc-tool.state';
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    HttpClientModule,
     NgxsModule.forRoot([CalcToolState], {developmentMode: !environment.production})
   ],
   exports: [
