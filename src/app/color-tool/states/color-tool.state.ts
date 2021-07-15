@@ -1,7 +1,10 @@
 import { Injectable } from "@angular/core";
-import { State, Action, StateContext } from "@ngxs/store";
-import { Color, NewColor } from "../models/colors";
-import { AppendColor, RemoveColor } from "../actions/color-action";
+import { Action, State, StateContext } from "@ngxs/store";
+import { AppendColor, RefreshColors, RemoveColor } from "../actions/color-action";
+import { Color } from "../models/colors";
+import { ColorsApiService } from "../services/colors-api.service";
+import { tap } from "rxjs/operators";
+
 
 export interface IColorToolStateModel {
     colors: Color[];
@@ -14,9 +17,18 @@ export interface IColorToolStateModel {
         colors: [],
     },
 })
-
 @Injectable()
 export class ColorToolState {
+
+    constructor(private colorsApi: ColorsApiService) { }
+
+    @Action(RefreshColors)
+    refreshColors(ctx: StateContext<IColorToolStateModel>) {
+        console.log('In Refresh Colors');
+        return this.colorsApi.all().pipe(tap(colors => ctx.patchState({ colors })));
+
+
+    }
 
     //STEP: 6 - Run the reducer to apply the action to the current state, to create a new state
     @Action(AppendColor)//This decorator connects the action type to this reducer function.
@@ -37,12 +49,12 @@ export class ColorToolState {
     }
 
     @Action(RemoveColor)
-    removeColor(ctx: StateContext<IColorToolStateModel>, action: RemoveColor){
+    removeColor(ctx: StateContext<IColorToolStateModel>, action: RemoveColor) {
         const colors = ctx.getState().colors;
         ctx.patchState({
-            colors: 
+            colors:
                 colors.filter(c => c.id !== action.colorId),
-            
+
         });
     }
 

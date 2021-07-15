@@ -12,6 +12,7 @@
     <button (click)="doReset()">Clear</button>
 
 </form>
+<h2 *ngIf="errMessage$ | async">{{errMessage$ | async}}</h2>
 <h3>{{result$ | async}}</h3>
 <table>
     <thead>

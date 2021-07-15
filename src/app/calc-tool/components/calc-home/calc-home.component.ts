@@ -29,7 +29,15 @@ export class CalcHomeComponent implements OnInit {
 
   @Select(operationCount)
   counts$!: Observable<OpCounts[]>;
+
+  @Select((state: { calcTool: ICalculatorToolStateModel }) => {
+     return state.calcTool.errorMessage;
+  })
+  errMessage$!: Observable<string>;
+
   constructor(private store: Store, private fb: FormBuilder) { }
+
+
 
   ngOnInit(): void {
     this.calcForm = this.fb.group({
@@ -55,7 +63,7 @@ export class CalcHomeComponent implements OnInit {
 
   doDivide() {
     const input = parseFloat(this.calcForm.get('numInput')?.value);
-    this.store.dispatch(new Divide(input));
+      this.store.dispatch(new Divide(input));
   }
 
   delHistory(histId: number) {
@@ -66,4 +74,5 @@ export class CalcHomeComponent implements OnInit {
     this.calcForm.get('numInput')?.setValue(0);
     this.store.dispatch(new ClearHistory());
   }
+
 }

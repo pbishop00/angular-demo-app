@@ -9,6 +9,7 @@ import { HistoryEntry } from "../model/calc-history";
 
 export interface ICalculatorToolStateModel{
     history: HistoryEntry[];
+    errorMessage: string;
 }
 
 
@@ -19,6 +20,7 @@ export interface ICalculatorToolStateModel{
     name: 'calcTool',
     defaults: {
         history: [],
+        errorMessage: '',
     },
 })
 @Injectable()
@@ -27,6 +29,7 @@ export class CalcToolState{
     addInput(ctx: StateContext<ICalculatorToolStateModel>, action: Add){
         const {history} = ctx.getState();
         ctx.patchState({
+            errorMessage: '',
             history:[
                 ...history,
                 {
@@ -42,6 +45,7 @@ export class CalcToolState{
     subtractInput(ctx: StateContext<ICalculatorToolStateModel>, action: Subtract){
         const {history} = ctx.getState();
         ctx.patchState({
+            errorMessage: '',
             history:[
                 ...history,
                 {
@@ -57,6 +61,7 @@ export class CalcToolState{
     multiplyInput(ctx: StateContext<ICalculatorToolStateModel>, action: Multiply){
         const {history} = ctx.getState();
         ctx.patchState({
+            errorMessage: '',
             history:[
                 ...history,
                 {
@@ -70,18 +75,24 @@ export class CalcToolState{
     }
     @Action(Divide)
     divideInput(ctx: StateContext<ICalculatorToolStateModel>, action: Divide){
-        const {history} = ctx.getState();
-        ctx.patchState({
-            history:[
-                ...history,
-                {
-                    id: Math.max(...history.map(h => h.id),0) + 1,
-                    opType: 'Divide',
-                    opValue: action.input,
+        if (action.input === 0){
+            ctx.patchState({errorMessage: 'Cannot divide by 0'});
+        }else{
+            const {history} = ctx.getState();
+            ctx.patchState({
+                errorMessage: '',
+                history:[
+                    ...history,
+                    {
+                        id: Math.max(...history.map(h => h.id),0) + 1,
+                        opType: 'Divide',
+                        opValue: action.input,
 
-                }
-            ]
-        });
+                    }
+                ]
+        
+            });
+        }
     }
 
     @Action(DeleteHistoryEntry)
@@ -95,6 +106,7 @@ export class CalcToolState{
     @Action(ClearHistory)
     clearHistory(ctx: StateContext<ICalculatorToolStateModel>){
         ctx.patchState({
+            errorMessage: '',
             history: []
         });
     }

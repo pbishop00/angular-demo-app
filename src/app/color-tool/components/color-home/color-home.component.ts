@@ -6,7 +6,7 @@ import { FormGroup, FormBuilder, Form } from '@angular/forms';
 import { IColorToolStateModel } from '../../states/color-tool.state';
 import { Color, NewColor } from '../../models/colors';
 import { AppendColor, RemoveColor } from '../../actions/color-action';
-
+import { RefreshColors } from '../../actions/color-action';
 @Component({
   selector: 'app-color-home',
   templateUrl: './color-home.component.html',
@@ -27,10 +27,12 @@ export class ColorHomeComponent implements OnInit {
   constructor(private store: Store, private fb: FormBuilder) { }
 
   ngOnInit(): void {
+    console.log("Init");
     this.colorForm = this.fb.group({
       name: '',
       hexcode:'',
     });
+    this.store.dispatch(new RefreshColors());
   }
 
   //STEP: 4 - Function

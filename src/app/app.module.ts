@@ -14,9 +14,9 @@ import { CalcToolModule } from './calc-tool/calc-tool.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    UserAccountsModule,
+    //UserAccountsModule,
     ColorToolModule,
-    CalcToolModule,
+   //CalcToolModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
